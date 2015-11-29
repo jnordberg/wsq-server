@@ -1,0 +1,21 @@
+{
+  "name": "wsq-server",
+  "version": "0.1.0",
+  "description": "wsq server cli",
+  "main": "server.js",
+  "bin": {
+    "wsq-server": "server.js"
+  },
+  "author": "Johan Nordberg <code@johan-nordberg.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jnordberg/wsq-server.git"
+  },
+  "dependencies": {
+    "bunyan": "^1.5.1",
+    "fs-blob-store": "^5.2.0",
+    "leveldown": "^1.4.2",
+    "wsq": "0.1.*"
+  }
+}
