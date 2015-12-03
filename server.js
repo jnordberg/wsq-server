@@ -7,6 +7,7 @@ var leveldown = require('leveldown')
 var os = require('os')
 var path = require('path')
 var Server = require('wsq/server')
+var wsqVersion = require('wsq/package').version
 
 // https://github.com/nodejs/node/issues/1592 :S
 existsSync.__test = (typeof fs.accessSync === 'function') ? fs.accessSync : fs.statSync;
@@ -65,7 +66,7 @@ var options = {
 }
 
 var log = bunyan.createLogger({name: 'wsq-server', level: logLevel})
-log.info({options: options}, 'Starting server')
+log.info({options: options, version: wsqVersion}, 'Starting server')
 
 var server = new Server({
 	blobStore: new BlobStore(storageLocation),
