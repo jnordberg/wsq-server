@@ -9,28 +9,13 @@ var path = require('path')
 var Server = require('wsq/server')
 var wsqVersion = require('wsq/package').version
 
-// https://github.com/nodejs/node/issues/1592 :S
-existsSync.__test = (typeof fs.accessSync === 'function') ? fs.accessSync : fs.statSync;
-function existsSync(path) {
-	try {
-		existsSync.__test(path, fs.F_OK);
-		return true;
-	} catch (error) {
-		if (error.code === 'ENOENT') {
-			return false;
-		} else {
-			throw error;
-		}
-	}
-}
-
 function defaultDatadir() {
 	var name = 'wsq-server'
 	if (os.platform() != 'win32') {
 		name = '.' + name
 	}
 	var dir = path.join(os.homedir(), name)
-	if (!existsSync(dir)) fs.mkdirSync(dir)
+	try { fs.mkdirSync(dir) } catch (error) { if (error.code !== 'EEXIST') throw error }
 	return dir
 }
 
